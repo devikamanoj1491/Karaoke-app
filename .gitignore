@@ -1,0 +1,27 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Audio files
+*.mp3
+*.wav
+*.flac
+
+# Demucs output
+output/
+separated/
+
+# Torch / cache
+.cache/
+torch_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (if frontend exists)
+node_modules/
