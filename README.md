@@ -1,4 +1,4 @@
-# 🎤 AI Karaoke Maker
+# 🎤 KaraokePro
 
 An AI-powered web application that separates music tracks into stems (drums, bass, vocals, and others) and automatically "glues" the instrumental parts back together for a perfect karaoke experience.
 
