@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from database import Base
 import datetime
 
 Base = declarative_base()
@@ -20,5 +21,6 @@ class Song(Base):
     status = Column(String, default="processing") # processing, completed, failed
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     owner_id = Column(Integer, ForeignKey("users.id"))
+    progress = Column(Integer, default=0)
     
     owner = relationship("User", back_populates="songs")

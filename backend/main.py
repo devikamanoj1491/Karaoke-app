@@ -49,13 +49,17 @@ async def upload_song(
 
 # 3. Status Route
 @app.get("/status/{filename}")
-async def get_status(filename: str):
+async def get_status(filename: str, db: Session = Depends(get_db)):
     song_folder = os.path.splitext(filename)[0]
     target_path = os.path.join("output", "mdx_extra_q", song_folder, "instrumental.mp3")
-
+    song = db.query(models.Song).filter(models.Song.filename == filename).first()
+    
+    if not song:
+        raise HTTPException(status_code=404, detail="Song not found")
     if os.path.exists(target_path):
         return {
-            "status": "completed", 
+            "status": song.status,
+            "progress": song.progress, 
             # Pointing to our custom forced-download route
             "download_url": f"http://127.0.0.1:8000/download/mdx_extra_q/{song_folder}/instrumental.mp3"
         }
