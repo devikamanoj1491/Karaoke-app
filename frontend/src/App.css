@@ -1,4 +1,6 @@
-/* 1. Global Reset */
+/* Modern KaraokePro - Premium Design System */
+
+/* 1. Global Reset & Theme */
 * {
   box-sizing: border-box;
 }
@@ -8,115 +10,370 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
-  background-color: #121212;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a0e3a 50%, #0f1a2e 100%);
   color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* 2. The Centering Wrapper */
+body {
+  min-height: 100vh;
+}
+
+/* 2. Layout Wrapper */
 .layout-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-/* 3. The Card */
+/* 3. Premium Card Styling */
 .karaoke-card {
-  background-color: #1e1e1e;
-  padding: 3rem;
-  border-radius: 24px;
-  border: 1px solid #333;
+  background: rgba(30, 30, 50, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 3.5rem 3rem;
+  border-radius: 28px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
   width: 100%;
-  max-width: 450px;
+  max-width: 500px;
   text-align: center;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(99, 102, 241, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  animation: slideInUp 0.6s ease-out;
+  transition: all 0.3s ease;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   margin-top: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
 }
 
+h1::after {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%);
+  border-radius: 2px;
+  margin-top: 1rem;
+  animation: expandWidth 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* 4. Upload Section */
 .upload-box {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+  margin-top: 2.5rem;
 }
 
 .file-input {
-  color: #888;
-  font-size: 0.9rem;
+  color: #a0aec0;
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+.file-input:hover {
+  border-color: rgba(99, 102, 241, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.file-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 5. Main Button Styling */
 .main-button {
-  background-color: #2563eb;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
   border: none;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 16px 24px;
+  border-radius: 14px;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  transition: all 0.2s;
+  gap: 12px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.main-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease;
+}
+
+.main-button:hover:not(:disabled)::before {
+  left: 100%;
 }
 
 .main-button:hover:not(:disabled) {
-  background-color: #1d4ed8;
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+}
+
+.main-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.main-button:disabled {
+  background: linear-gradient(135deg, #4b5563 0%, #3a4555 100%);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.reset-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.reset-button:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
 }
 
 .is-loading {
-  background-color: #333 !important;
-  cursor: not-allowed;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3) !important;
 }
 
-/* 4. Progress Bar */
+/* 6. Progress Bar Section */
+.progress-area {
+  margin-top: 2.5rem;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.progress-area p {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
 .bar-container {
-  height: 8px;
-  background: #333;
-  border-radius: 10px;
-  margin-top: 25px;
+  height: 6px;
+  background: rgba(51, 65, 85, 0.4);
+  border-radius: 12px;
   overflow: hidden;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .bar-fill {
   height: 100%;
-  background: #2563eb;
-  transition: width 0.4s ease-in-out;
+  background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 100%);
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+  border-radius: 12px;
 }
 
-/* 5. Results */
+/* 7. Success Banner */
 .success-banner {
-  background: #064e3b;
-  color: #10b981;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 20px;
-  border: 1px solid #065f46;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 78, 59, 0.1) 100%);
+  color: #6ee7b7;
+  padding: 16px;
+  border-radius: 14px;
+  margin-top: 2rem;
+  border: 1.5px solid rgba(16, 185, 129, 0.4);
+  font-weight: 600;
+  font-size: 1.05rem;
+  animation: slideDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
 }
 
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-banner p {
+  margin: 0;
+}
+
+/* 8. Download Button */
 .download-cta {
-  display: block;
-  margin-top: 15px;
-  padding: 14px;
-  background: #10b981;
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
   color: white;
   text-decoration: none;
-  border-radius: 12px;
-  font-weight: bold;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
+.download-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease;
+}
+
+.download-cta:hover::before {
+  left: 100%;
+}
+
+.download-cta:hover {
+  background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(236, 72, 153, 0.4);
+}
+
+.download-cta:active {
+  transform: translateY(0);
+}
+
+/* 9. Spinner Animation */
 .spinner {
-  animation: spin 1s linear infinite;
+  animation: spin 1.2s linear infinite;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 10. Responsive Design */
+@media (max-width: 640px) {
+  .karaoke-card {
+    padding: 2.5rem 1.75rem;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .main-button {
+    padding: 14px 20px;
+    font-size: 0.95rem;
+  }
+
+  .download-cta {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .layout-wrapper {
+    padding: 12px;
+  }
+
+  .karaoke-card {
+    padding: 2rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  h1::after {
+    margin-top: 0.75rem;
+  }
+
+  .upload-box {
+    gap: 12px;
+    margin-top: 1.75rem;
+  }
+
+  .main-button {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+}
+
+/* 11. Utility Classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
