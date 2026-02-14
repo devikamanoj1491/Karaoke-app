@@ -51,7 +51,7 @@ async def upload_song(
 @app.get("/status/{filename}")
 async def get_status(filename: str, db: Session = Depends(get_db)):
     song_folder = os.path.splitext(filename)[0]
-    target_path = os.path.join("output", "mdx_extra_q", song_folder, "instrumental.mp3")
+    target_path = os.path.join("output", "htdemucs", song_folder, "instrumental.mp3")
     song = db.query(models.Song).filter(models.Song.filename == filename).first()
     
     if not song:
@@ -61,7 +61,7 @@ async def get_status(filename: str, db: Session = Depends(get_db)):
             "status": song.status,
             "progress": song.progress, 
             # Pointing to our custom forced-download route
-            "download_url": f"http://127.0.0.1:8000/download/mdx_extra_q/{song_folder}/instrumental.mp3"
+            "download_url": f"http://127.0.0.1:8000/download/htdemucs/{song_folder}/instrumental.mp3"
         }
     return {"status": "processing"}
 

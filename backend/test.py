@@ -17,7 +17,10 @@ def process_audio(filename: str):
     output_dir = Path("output")
     command = [
         "demucs",
-        "-n", "mdx_extra_q",
+        "-n", "htdemucs",
+        "--shifts", "0",    # Disables re-processing the song 4+ times
+        "--overlap", "0.1", # Reduces redundant calculations
+        "-j", "4",          # Uses 4 CPU cores (increase if you have more)
         str(input_path),
         "--out", str(OUTPUT_DIR)
     ]
@@ -43,7 +46,7 @@ def process_audio(filename: str):
         subprocess.run(command, check=True)
         # Step 2: Define paths for the glue step
         song_name = Path(filename).stem
-        song_folder = OUTPUT_DIR / "mdx_extra_q" / song_name
+        song_folder = OUTPUT_DIR / "htdemucs" / song_name
         output_mp3 = song_folder / "instrumental.mp3"
 
         print(f"--- Creating instrumental (gluing) for: {song_name} ---")
@@ -56,7 +59,7 @@ def process_audio(filename: str):
             "-i", str(song_folder / "bass.wav"), 
             "-i", str(song_folder / "other.wav"), 
             "-filter_complex", "amix=inputs=3:duration=first", 
-            "-b:a", "320k", 
+            "-b:a", "192k", 
             str(output_mp3)
         ], check=True)
         song.progress = 100
