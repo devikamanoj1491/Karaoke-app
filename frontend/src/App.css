@@ -247,7 +247,35 @@ body {
   height: 35px;
   filter: invert(100%) hue-rotate(180deg) brightness(1.5);
 }
+.content-scroll {
+  padding: 0 3rem; /* Adjust this to match your Hero section's padding */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+.view-all {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
+.view-all:hover {
+  background: rgba(139, 92, 246, 0.1);
+  color: #ffffff;
+  border-color: #8b5cf6;
+}
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
